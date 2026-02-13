@@ -1,0 +1,70 @@
+buildscript {
+    ext.kotlin_version = '2.1.0'
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.google.gms:google-services:4.4.3'
+
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    configurations.all {
+        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+            if (details.requested.group == 'androidx.appcompat') {
+                if (details.requested.name == 'appcompat' || details.requested.name == 'appcompat-resources') {
+                    details.useVersion '1.6.1'
+                }
+            }
+        }
+    }
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+        kotlinOptions {
+            jvmTarget = "21"
+        }
+    }
+}
+
+rootProject.buildDir = '../build'
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+    afterEvaluate{project->
+        if (project.hasProperty('android')) {
+            project.android {
+                if (namespace == null) {
+                    namespace project.group
+                }
+                compileOptions {
+                    sourceCompatibility JavaVersion.VERSION_21
+                    targetCompatibility JavaVersion.VERSION_21
+                }
+            }
+        }
+        if (project.name == "qr_code_scanner" || project.name == "nb_utils"){
+            project.android {
+                compileOptions {
+                    sourceCompatibility JavaVersion.VERSION_21
+                    targetCompatibility JavaVersion.VERSION_21
+                }
+            }
+        }
+
+        android{
+            compileSdkVersion 36
+        }
+    }
+}
+subprojects {
+    project.evaluationDependsOn(':app')
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}
