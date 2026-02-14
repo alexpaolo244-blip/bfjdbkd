@@ -2,7 +2,6 @@ plugins {
     id("com.android.application")
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
-    // تم تعطيل إضافة جوجل لتجاوز خطأ الملف المفقود
     // id "com.google.gms.google-services"
 }
 
@@ -40,20 +39,17 @@ android {
         }
     }
 
-    // معطل لارتباطه بخدمات جوجل
-    // googleServices { disableVersionCheck = true }
-    
     compileOptions {
         coreLibraryDesugaringEnabled true
-        // تم التغيير إلى 17 لضمان التوافق مع سيرفر البناء
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        // تم التغيير إلى 17 لتجنب خطأ invalid source release
         jvmTarget = "17"
+        freeCompilerArgs += ["-Xjdk-release=17"]
     }
+
     lint {
         disable 'InvalidPackage'
     }
@@ -64,14 +60,13 @@ flutter {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.9.22"
     implementation 'androidx.multidex:multidex:2.0.1'
-    // تم تعطيل مكتبات Firebase وجوجل مؤقتاً
-    // implementation 'com.google.firebase:firebase-analytics:22.5.0'
-    // implementation 'com.google.android.gms:play-services-basement:18.7.1'
-    implementation 'androidx.core:core-ktx:1.16.0'
-    implementation 'androidx.appcompat:appcompat:1.7.1'
-    implementation 'androidx.appcompat:appcompat-resources:1.7.1'
+
+    implementation 'androidx.core:core-ktx:1.13.1'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'androidx.appcompat:appcompat-resources:1.7.0'
     implementation 'androidx.media:media:1.7.0'
+
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.5'
 }
