@@ -4,7 +4,7 @@ const BASE_URL = "https://zarship.com/";
 //without PHP backend
 const PURCHASE_CODE = '';
 const BASE_URL_OFFLINE =
-    'https://meetmighty.com/mightyweb-public/view/getjson.php?user=$PURCHASE_CODE';
+    '';
 
 //preference
 const mOneSignalID = 'mOne_signal_id';
@@ -244,3 +244,4 @@ List<String> loaderName = [
 const EnableHome = false;
 const EnableDemo = false;
 const EnableMode = true;
+
