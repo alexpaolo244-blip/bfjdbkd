@@ -4,16 +4,19 @@ workflows:
     instance_type: mac_mini_m2
     max_build_duration: 60
     environment:
+      vars:
+        # هذا السطر يرفع ذاكرة الجافا لتجنب خطأ Java heap space
+        JAVA_OPTS: "-Xmx4G"
+        GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx4G"
       flutter: stable
       java: 21 
     scripts:
       - name: Get Flutter packages
         script: flutter pub get
       - name: Build Android Debug APK
-        script: flutter build apk --debug
+        script: |
+          # إجبار جرادل على استخدام ذاكرة أكبر في هذا السكربت أيضاً
+          export GRADLE_OPTS="-Xmx4G -XX:MaxMetaspaceSize=1G"
+          flutter build apk --debug
     artifacts:
       - build/app/outputs/flutter-apk/app-debug.apk
-    publishing:
-      email:
-        recipients:
-          - alexpaolo244@gmail.com # سيصلك رابط التحميل فوراً هنا
