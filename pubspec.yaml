@@ -43,10 +43,6 @@ dependencies:
   # PUSH NOTIFICATION
   onesignal_flutter: ^5.3.4
 
-  # ADS
-  google_mobile_ads: ^6.0.0
-  facebook_audience_network: ^1.0.1
-
   # WEB TOOLS
   flutter_inappwebview: ^6.1.5
 
@@ -60,7 +56,6 @@ dev_dependencies:
     sdk: flutter
   build_runner: ^2.9.0
   mobx_codegen: ^2.7.4
-  #flutter packages pub run build_runner build --delete-conflicting-outputs
 
 dependency_overrides:
   js: ^0.6.3
