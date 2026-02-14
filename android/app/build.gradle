@@ -2,7 +2,8 @@ plugins {
     id("com.android.application")
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
-    id "com.google.gms.google-services"
+    // تم تعطيل إضافة جوجل هنا لتجاوز خطأ الملف المفقود
+    // id "com.google.gms.google-services"
 }
 
 def localProperties = new Properties()
@@ -22,7 +23,6 @@ android {
         main.java.srcDirs += 'src/main/kotlin'
     }
 
-
     defaultConfig {
         applicationId "com.shofyou.app"
         minSdkVersion 24
@@ -40,7 +40,9 @@ android {
         }
     }
 
-    googleServices { disableVersionCheck = true }
+    // تم تعطيل هذا السطر لأنه مرتبط بخدمات جوجل
+    // googleServices { disableVersionCheck = true }
+    
     compileOptions {
         coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_21
@@ -53,21 +55,18 @@ android {
     lint {
         disable 'InvalidPackage'
     }
-
 }
 
 flutter {
     source '../..'
 }
-allprojects {
-    /// TODO: remove. hotfix for flutter_inappwebview (using androidx.webkit:webkit:1.8.0)
-}
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.multidex:multidex:2.0.1'
-    implementation 'com.google.firebase:firebase-analytics:22.5.0'
-    implementation 'com.google.android.gms:play-services-basement:18.7.1'
+    // تم تعطيل مكتبات Firebase وجوجل مؤقتاً لنجاح البناء
+    // implementation 'com.google.firebase:firebase-analytics:22.5.0'
+    // implementation 'com.google.android.gms:play-services-basement:18.7.1'
     implementation 'androidx.core:core-ktx:1.16.0'
     implementation 'androidx.appcompat:appcompat:1.7.1'
     implementation 'androidx.appcompat:appcompat-resources:1.7.1'
