@@ -2,7 +2,7 @@ plugins {
     id("com.android.application")
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
-    // تم تعطيل إضافة جوجل هنا لتجاوز خطأ الملف المفقود
+    // تم تعطيل إضافة جوجل لتجاوز خطأ الملف المفقود
     // id "com.google.gms.google-services"
 }
 
@@ -40,17 +40,19 @@ android {
         }
     }
 
-    // تم تعطيل هذا السطر لأنه مرتبط بخدمات جوجل
+    // معطل لارتباطه بخدمات جوجل
     // googleServices { disableVersionCheck = true }
     
     compileOptions {
         coreLibraryDesugaringEnabled true
-        sourceCompatibility JavaVersion.VERSION_21
-        targetCompatibility JavaVersion.VERSION_21
+        // تم التغيير إلى 17 لضمان التوافق مع سيرفر البناء
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = "21"
+        // تم التغيير إلى 17 لتجنب خطأ invalid source release
+        jvmTarget = "17"
     }
     lint {
         disable 'InvalidPackage'
@@ -64,7 +66,7 @@ flutter {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.multidex:multidex:2.0.1'
-    // تم تعطيل مكتبات Firebase وجوجل مؤقتاً لنجاح البناء
+    // تم تعطيل مكتبات Firebase وجوجل مؤقتاً
     // implementation 'com.google.firebase:firebase-analytics:22.5.0'
     // implementation 'com.google.android.gms:play-services-basement:18.7.1'
     implementation 'androidx.core:core-ktx:1.16.0'
