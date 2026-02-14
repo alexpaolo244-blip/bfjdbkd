@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.mighty.web"
+    namespace = "com.shofyou.app"
     compileSdkVersion 36
     ndkVersion "29.0.14033849"
 
@@ -55,3 +55,4 @@ dependencies {
 
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.5'
 }
+
