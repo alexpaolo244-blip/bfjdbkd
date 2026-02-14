@@ -13,6 +13,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ProcessLifecycleOwner
+// إضافة هذا السطر الصريح لحل مشكلة الـ R
+import com.shofyou.app.R
 
 class AudioService : Service(), LifecycleObserver {
 
@@ -54,7 +56,8 @@ class AudioService : Service(), LifecycleObserver {
             manager.createNotificationChannel(notificationChannel)
         }
 
-        val launchIntent = packageManager.getLaunchIntentForPackage("com.mighty.web")
+        // تم التغيير هنا ليبحث عن حزمة التطبيق الحالية وليس القديمة
+        val launchIntent = packageManager.getLaunchIntentForPackage("com.shofyou.app")
         if (launchIntent == null) {
             return
         }
@@ -67,7 +70,7 @@ class AudioService : Service(), LifecycleObserver {
 
         val notification: Notification = NotificationCompat.Builder(this, channelId)
             .setSilent(true)
-            .setContentTitle("MightyWeb is running")
+            .setContentTitle("Shofyou is running") // تغيير الاسم ليناسب تطبيقك
             .setAutoCancel(true)
             .setPriority(NotificationCompat.PRIORITY_MIN)
             .setSmallIcon(R.mipmap.ic_launcher_foreground)
