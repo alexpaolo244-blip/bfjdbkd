@@ -1,6 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.shofyou.app">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <queries>
         <intent>
@@ -109,15 +108,6 @@
             android:enabled="true"
             android:exported="false" />
 
-<!--        <provider-->
-<!--            android:name="com.pichillilorenzo.flutter_inappwebview.InAppWebViewFileProvider"-->
-<!--            android:authorities="${applicationId}.flutter_inappwebview.fileprovider"-->
-<!--            android:exported="false"-->
-<!--            android:grantUriPermissions="true">-->
-<!--            <meta-data-->
-<!--                android:name="android.support.FILE_PROVIDER_PATHS"-->
-<!--                android:resource="@xml/file_paths" />-->
-<!--        </provider>-->
         <meta-data
             android:name="com.onesignal.suppressLaunchURLs"
             android:value="true" />
